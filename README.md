@@ -118,7 +118,8 @@ void loop()
     }
     Serial.println("\nConnected.");
   }
-
+```
+```
   // Read temperature
   float temperature = dht.readTemperature();
   float humidity = dht.readHumidity();
