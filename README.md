@@ -148,6 +148,11 @@ void loop()
 <img src="https://github.com/AmruthaRajsheker/Uploading-sensor-data-in-Thing-Speak-cloud/assets/119475943/e0f44e29-a916-4afc-b233-8b58393da9bb" alt="description" style="width: 50%; height: auto;">
 
 
+</br>
+</br>
+</br>
+</br>
+</br>
 
 # OUTPUT:
 
