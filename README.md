@@ -1,4 +1,7 @@
-# Uploading temperature sensor data in Thing Speak cloud
+##### NAME : Amrutha Rajsheker
+##### REG.NO : 212222110003
+
+# EXPERIMENT - 3 : Uploading temperature sensor data in Thing Speak cloud
 
 # AIM:
 To monitor the temperature sensor data in the Thing speak using an ESP32 controller.
@@ -71,10 +74,84 @@ Automatically act on your data and communicate using third-party services like T
 
 
 # PROGRAM:
+```
+#include "ThingSpeak.h"
+#include <WiFi.h>
+#include "DHT.h"
+#include <OneWire.h>
+#include <DallasTemperature.h>
 
-# CIRCUIT DIAGRAM:
+char ssid[] = "xxx"; // Your WiFi SSID
+char pass[] = "xxx"; // Your WiFi password
+
+const int out = 26; // Pin for temperature sensor data
+long T;
+float temperature = 0; // Initialize temperature
+WiFiClient client;
+DHT dht(26, DHT11);
+
+unsigned long myChannelField = 2487114; // Channel ID
+const int TemperatureField = 1;        // Field for temperature data
+const int HumidityField = 2;          // Field for humidity data
+
+const char* myWriteAPIKey = "BT4O1P45J883JFQT"; // Your write API Key
+
+// Temperature sensor setup
+void setup() {
+  Serial.begin(115200);
+  pinMode(out, INPUT); // Set pin mode to input for temperature sensor
+  ThingSpeak.begin(client);
+ }
+
+void loop() 
+{
+  if (WiFi.status() != WL_CONNECTED) 
+  {
+    Serial.print("Attempting to connect to SSID: ");
+    Serial.println(ssid);
+    while (WiFi.status() != WL_CONNECTED) 
+    {
+      WiFi.begin(ssid, pass);
+      Serial.print(".");
+      delay(5000);
+    }
+    Serial.println("\nConnected.");
+  }
+
+  // Read temperature
+  float temperature = dht.readTemperature();
+  float humidity = dht.readHumidity();
+  
+  Serial.print("Temperature: ");
+  Serial.print(temperature);
+  Serial.println(" °C");
+
+  Serial.print("Humidity ");
+  Serial.print(humidity);
+  Serial.println(" g.m-3");
+
+  // Write temperature to ThingSpeakaK
+  ThingSpeak.writeField(myChannelField, TemperatureField, temperature, myWriteAPIKey); // Write temperature to ThingSpeak
+  ThingSpeak.writeField(myChannelField, HumidityField, humidity, myWriteAPIKey); // Write humidity to ThingSpeak
+
+
+  delay(1000);
+}
+
+```
+
+# CIRCUIT SETUP:
+<img src="https://github.com/AmruthaRajsheker/Uploading-sensor-data-in-Thing-Speak-cloud/assets/119475943/e0f44e29-a916-4afc-b233-8b58393da9bb" alt="description" style="width: 50%; height: auto;">
+
+
 
 # OUTPUT:
+
+#### Output the values from the serial monitor in the Arduino IDE.
+<img src="https://github.com/AmruthaRajsheker/Uploading-sensor-data-in-Thing-Speak-cloud/assets/119475943/d8219690-2176-43b4-9abc-dd1ba28a1230" alt="description" style="width: 50%; height: auto;">
+
+#### Graphical values from ThingSpeak 
+<img src="https://github.com/AmruthaRajsheker/Uploading-sensor-data-in-Thing-Speak-cloud/assets/119475943/35b186ca-c6c9-4212-a53f-6bbaec56ef25" alt="description" style="width: 70%; height: auto;">
 
 # RESULT:
 
