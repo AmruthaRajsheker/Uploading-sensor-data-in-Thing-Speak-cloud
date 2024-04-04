@@ -7,11 +7,11 @@
 To monitor the temperature sensor data in the Thing speak using an ESP32 controller.
 
 # Apparatus required:
-ESP32 Controller  </br>
-Temperature Sensor </br>
-Power supply </br>
-Connecting wires </br>
-Bread board </br>
+* ESP32 Controller  </br>
+* Temperature Sensor </br>
+* Power supply </br>
+* Connecting wires </br>
+* Bread board </br>
 
 # PROCEDURE:
 ## Arduino IDE
@@ -74,6 +74,7 @@ Automatically act on your data and communicate using third-party services like T
 
 
 # PROGRAM:
+
 ```
 #include "ThingSpeak.h"
 #include <WiFi.h>
